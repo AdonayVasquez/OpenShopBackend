@@ -9,19 +9,14 @@ const app = express();
 // Configurar CORS
 app.use( cors() );
 
+// Lectura y parseo del body
+app.use( express.json() );
+
 // Base de Datos
 bddConexion();
 
-//  Credenciales de BDD: 
-//  Usuario: bdd_usuario
-//  Password: admin123
+app.use( '/api/usuarios', require('./routes/usuarios-routes') );
 
-app.get( '/', (req, res) =>{
-    res.json({
-        ok: true,
-        msg: 'Hola mundo'
-    });
-});
 
 app.listen( 3000, () => {
     console.log('Servidor corriendo');
